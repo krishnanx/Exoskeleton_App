@@ -9,10 +9,12 @@
       "web"
     ],
     "android": {
-      "package": "com.krishnanx.Exoskeleton"
+      "package": "com.krishnanx.Exoskeleton",
+      "newArchEnabled": true
     },
     "ios": {
-      "bundleIdentifier": "com.krishnanx.Exoskeleton"
+      "bundleIdentifier": "com.krishnanx.Exoskeleton",
+      "newArchEnabled": true
     }
   }
 }
