@@ -1,0 +1,18 @@
+{
+  "expo": {
+    "name": "Exoskeleton",
+    "slug": "Exoskeleton",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "android": {
+      "package": "com.krishnanx.Exoskeleton"
+    },
+    "ios": {
+      "bundleIdentifier": "com.krishnanx.Exoskeleton"
+    }
+  }
+}
