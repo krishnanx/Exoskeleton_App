@@ -1,9 +1,13 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 
 const GaitMetrics = () => {
     return (
-        <View>GaitMetrics</View>
+        <View>
+            <Text>
+                Gail metrics
+            </Text>
+        </View>
     )
 }
 
