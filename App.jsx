@@ -4,10 +4,22 @@ import UniversalNavi from "./src/Navigation/UniversalNavi";
 import { Provider } from 'react-redux';
 import store from './src/Store/store';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { StyleSheet } from 'react-native';
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
 
+  },
+  text: {
+    color: "black",
+    fontSize: 24,
+  },
+});
 const App = () => {
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider
+      style={styles.container}
+    >
       <Provider store={store}>
         <NavigationContainer>
           <UniversalNavi />
