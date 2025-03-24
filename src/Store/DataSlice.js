@@ -3,7 +3,8 @@ import axios from 'axios';
 const DataSlice = createSlice({
     name: 'data',
     initialState: {
-        data: []
+        data: [],
+        status: "idle"
     },
     reducers: {
         addData(state, action) {
@@ -15,7 +16,7 @@ const DataSlice = createSlice({
                 state.status = "loading";
             })
             .addCase(getData.fulfilled, (state, action) => {
-                state.status = "succeeded";
+                state.status = "idle";
                 state.data = action.payload; // ✅ Set data properly
             })
             .addCase(getData.rejected, (state, action) => {

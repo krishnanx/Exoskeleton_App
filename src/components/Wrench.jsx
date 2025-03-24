@@ -4,7 +4,7 @@ import Icons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useSelector } from "react-redux";
 const Wrench = ({ isactive }) => {
     const scaleValue = useRef(new Animated.Value(1)).current;
-    const { data } = useSelector((state) => state.data);
+    const { data, status } = useSelector((state) => state.data);
     useEffect(() => {
         if (data?.motorStatus) {
             const pulse = Animated.loop(

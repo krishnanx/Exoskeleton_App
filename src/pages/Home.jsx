@@ -12,7 +12,7 @@ import Wrench from '../components/Wrench';
 import { getData } from '../Store/DataSlice';
 const Home = () => {
     console.log("HI")
-    const { data } = useSelector((state) => state.data)
+    const { data, status } = useSelector((state) => state.data)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getData())
