@@ -15,7 +15,7 @@ const LiveData = () => {
         };
 
         ws.onmessage = (event) => {
-            //console.log("Data received:", event);
+            console.log("Data received:", event);
             const parsedData = JSON.parse(event.data);
             console.log("Data received:", parsedData?.new);
             dispatch(addData(parsedData.new));

@@ -1,11 +1,11 @@
 import React from 'react'
 import { Avatar, Button, Card, Text } from 'react-native-paper';
-import { StyleSheet, Animated, Easing } from 'react-native';
+import { StyleSheet, Animated, Easing, View } from 'react-native';
 import { useEffect, useRef } from "react";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import { useSelector } from "react-redux";
-const MotorCard = ({ title, icon, Content, isActive = true }) => {
-    const { data } = useSelector((state) => state.data);
+const MotorCard = ({ title, icon, Content, isActive = true, value }) => {
+    const { data, status, Mode } = useSelector((state) => state.data);
     const LeftContent = props => icon
     const styles = StyleSheet.create({
         card: {
@@ -17,13 +17,35 @@ const MotorCard = ({ title, icon, Content, isActive = true }) => {
 
 
     });
-    return (
+    useEffect(() => {
+        console.log("Redux Data:", data);
+        console.log("MotorCard Value:", value);
+        console.log("Redux Status:", status);
+    }, [data, value, status]);
+
+    return data ? (
         <Card style={styles.card}>
-            <Card.Title title={title} left={LeftContent} titleStyle={{}} />
+            {/* <Card.Title title={title} left={LeftContent} titleStyle={{ justifyContent: "center", alignItems: "center", textAlign: "center", flexWrap: "wrap", }} /> */}
             <Card.Content>
-                <Text>
-                    {data?.motorStatus ? "Active" : "Idle"}
-                </Text>
+                <View
+                    style={{ flexDirection: "row", width: "auto", justifyContent: "space-around" }}
+                >
+                    <LeftContent />
+                    <Text
+                        style={{ fontSize: 17 }}
+                    >
+                        {title}
+                    </Text>
+                </View>
+                <View
+                    style={{ width: "auto", justifyContent: "center", alignItems: "center", height: "70%" }}
+                >
+                    <Text
+                        style={{ fontSize: 15 }}
+                    >
+                        {value}
+                    </Text>
+                </View>
 
             </Card.Content>
             {/* <Card.Cover source={{ uri: 'https://picsum.photos/700' }} /> */}
@@ -32,7 +54,7 @@ const MotorCard = ({ title, icon, Content, isActive = true }) => {
                 <Button>Ok</Button> */}
             </Card.Actions>
         </Card>
-    )
+    ) : <Text style={{ color: "white", fontSize: 20 }}>Loading data...</Text>
 }
 
 export default MotorCard

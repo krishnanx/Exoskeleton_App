@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableOpacity, TouchableHighlight } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
 import ToggleSwitch from "../components/ToggleSwitch"
 import powerIcon from "../assets/Power.svg"
@@ -9,10 +9,10 @@ import MotorCard from '../components/MotorCard';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import Wrench from '../components/Wrench';
-import { getData } from '../Store/DataSlice';
+import { addData, getData, addMode } from '../Store/DataSlice';
 const Home = () => {
     console.log("HI")
-    const { data, status } = useSelector((state) => state.data)
+    const { data, status, Mode } = useSelector((state) => state.data)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getData())
@@ -40,6 +40,24 @@ const Home = () => {
             alignItems: "center",
             flexDirection: 'row'
         },
+        section2: {
+            padding: 20,
+            width: "100%",
+            //backgroundColor: "pink",
+            height: 100,
+
+            alignItems: "flex-start",
+            flexDirection: 'column'
+        },
+        section3: {
+            width: "100%",
+            height: "55%",
+            //borderWidth: 1.
+            paddingLeft: 5,
+            justifyContent: "center",
+            alignItems: "center"
+
+        },
         PowerStatus: {
             width: 40,
             height: 40,
@@ -56,10 +74,30 @@ const Home = () => {
             // backgroundColor: "white",
             justifyContent: "center",
             alignItems: "center"
+        },
+        OperationModes: {
+            //borderColor: "green",
+            borderWidth: 1.5,
+            width: "100%",
+            height: "25%",
+            borderRadius: 20,
+            justifyContent: "center",
+            alignItems: "center"
+
+        },
+        OperationText: {
+            //borderWidth: 1.5,
+            width: "100%",
+            height: "50%",
+            justifyContent: "center"
         }
 
 
     });
+    useEffect(() => {
+        console.log("Power Check:", data?.Power === 1);
+        console.log(data)
+    }, [data])
     return (
 
         <LinearGradient
@@ -130,18 +168,78 @@ const Home = () => {
                     style={styles.section1}
                 >
                     <View
-                        style={styles.MotorCard}
+                        style={[styles.MotorCard, { paddingLeft: 5 }]}
                     >
-                        <MotorCard title="Motor Status" icon={<Wrench />} />
+                        <MotorCard title="Motor Status" icon={<Wrench />} value={`${data?.motorStatus === 1 ? "Active" : "Idle"}`} />
                     </View>
                     <View
-                        style={styles.MotorCard}
+                        style={[styles.MotorCard, { paddingRight: 5, flexDirection: "column" }]}
                     >
-                        <MotorCard />
+                        <TouchableHighlight
+                            onPress={() => { dispatch(addMode("Walking Assist")) }}
+                            style={[styles.OperationModes, { marginBottom: 20, borderColor: data?.Power !== 1 ? "red" : "green", fontSize: 20, backgroundColor: Mode == "Walking Assist" ? "#666666" : "transparent" }]}
+                        >
+                            <Text
+                                style={{ fontSize: 17, color: "white" }}
+                            >
+                                Walking Assist
+                            </Text>
+                        </TouchableHighlight>
+                        <TouchableHighlight
+                            onPress={() => { dispatch(addMode("Free Mode")) }}
+                            style={[styles.OperationModes, { borderColor: data?.Power !== 1 ? "red" : "green", fontSize: 20, backgroundColor: Mode == "Free Mode" ? "#666666" : "transparent" }]}
+                        >
+                            <Text
+                                style={{ fontSize: 17, color: "white" }}
+                            >
+                                Free Mode
+                            </Text>
+                        </TouchableHighlight>
+                    </View>
+                </View>
+                <View
+                    style={styles.section2}
+                >
+                    {Mode !== "" ? <View
+                        style={styles.OperationText}
+                    >
+                        <Text
+                            style={{ fontSize: 17, color: "white" }}
+                        >
+                            OPERATION MODE:   {Mode}
+                        </Text>
+                    </View> : <></>}
+                </View>
+                <View
+                    style={styles.section3}
+
+                >
+                    <View
+                        style={{ width: "100%", height: "50%", flexDirection: "row" }}
+                    >
+
+                        <View
+                            style={{ width: "50%", height: "auto" }}
+                        >
+                            <MotorCard title="Step Count" icon={<Wrench />} value={0} />
+                        </View>
+                        <View
+                            style={{ width: "50%", height: "auto" }}
+                        >
+                            <MotorCard title="Walking Speed" icon={<Wrench />} value={0} />
+                        </View>
+                    </View>
+                    <View
+                        style={{ width: "100%", height: "50%", justifyContent: "center", alignItems: "center" }}
+                    >
+                        <View
+                            style={{ width: "50%", height: "auto" }}
+                        >
+                            <MotorCard title="Stride Length" icon={<Wrench />} value={0} />
+                        </View>
                     </View>
                 </View>
             </View>
-
         </LinearGradient >
 
     )

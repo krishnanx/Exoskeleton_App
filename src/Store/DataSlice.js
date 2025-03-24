@@ -3,12 +3,16 @@ import axios from 'axios';
 const DataSlice = createSlice({
     name: 'data',
     initialState: {
-        data: [],
-        status: "idle"
+        data: {},
+        status: "idle",
+        Mode: ""
     },
     reducers: {
         addData(state, action) {
             state.data = action.payload
+        },
+        addMode(state, action) {
+            state.Mode = action.payload
         }
     }, extraReducers: (builder) => {
         builder
@@ -17,7 +21,7 @@ const DataSlice = createSlice({
             })
             .addCase(getData.fulfilled, (state, action) => {
                 state.status = "idle";
-                state.data = action.payload; // ✅ Set data properly
+                state.data = action.payload;
             })
             .addCase(getData.rejected, (state, action) => {
                 state.status = "failed";
@@ -26,7 +30,7 @@ const DataSlice = createSlice({
     }
 
 })
-export const { addData } = DataSlice.actions;
+export const { addData, addMode } = DataSlice.actions;
 export default DataSlice.reducer;
 export const getData = createAsyncThunk("data/get", async () => {
     try {
