@@ -11,6 +11,7 @@ const LiveData = () => {
         ws.onopen = () => {
             console.log("Connected to WebSocket server");
             ws.send("Hello from React Native!");
+
         };
 
         ws.onmessage = (event) => {

@@ -1,13 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
 import ToggleSwitch from "../components/ToggleSwitch"
 import powerIcon from "../assets/Power.svg"
 import { Svg, Path } from 'react-native-svg';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import MotorCard from '../components/MotorCard';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import EvilIcons from "react-native-vector-icons/EvilIcons";
+import Wrench from '../components/Wrench';
+import { getData } from '../Store/DataSlice';
 const Home = () => {
     console.log("HI")
     const { data } = useSelector((state) => state.data)
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(getData())
+    }, [])
     const styles = StyleSheet.create({
         HeadingView: {
             flexDirection: "row",
@@ -23,10 +32,13 @@ const Home = () => {
             // backgroundColor: "black",
             height: 685
         },
-        Power: {
+        section1: {
             width: "100%",
             // backgroundColor: "pink",
-            height: 200
+            height: 200,
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexDirection: 'row'
         },
         PowerStatus: {
             width: 40,
@@ -37,6 +49,14 @@ const Home = () => {
             justifyContent: "center",
             alignItems: "center"
         },
+
+        MotorCard: {
+            width: "50%",
+            height: "100%",
+            // backgroundColor: "white",
+            justifyContent: "center",
+            alignItems: "center"
+        }
 
 
     });
@@ -107,9 +127,18 @@ const Home = () => {
                 style={styles.Main}
             >
                 <View
-                    style={styles.Power}
+                    style={styles.section1}
                 >
-
+                    <View
+                        style={styles.MotorCard}
+                    >
+                        <MotorCard title="Motor Status" icon={<Wrench />} />
+                    </View>
+                    <View
+                        style={styles.MotorCard}
+                    >
+                        <MotorCard />
+                    </View>
                 </View>
             </View>
 
