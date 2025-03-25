@@ -4,7 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Svg, Circle } from "react-native-svg";
 import AngleBar from '../components/AngleBar';
 import { useSelector } from 'react-redux';
-import AngularVelocity from "../components/AngularVelocity"
+import CircularProgress from "../components/CircularProgress"
 const GaitMetrics = () => {
     const { data, status, Mode } = useSelector((state) => state.data)
     const styles = StyleSheet.create({
@@ -39,6 +39,14 @@ const GaitMetrics = () => {
             alignItems: "center",
             height: "40%",
             flexDirection: "row"
+        },
+        AVA: {
+            width: "50%",
+            justifyContent: "space-around",
+            alignItems: "center",
+            height: "100%",
+            //backgroundColor: "pink"
+
         }
     })
     return (
@@ -81,15 +89,32 @@ const GaitMetrics = () => {
                 <View
                     style={styles.AngularVelocity}
                 >
-                    <View>
-                        <AngularVelocity angularVelocity={20} />
-                    </View>
-                    <View>
-                        <Text
-                            style={{ fontSize: 25, color: "white", fontWeight: "bold" }}
+                    <View
+                        style={styles.AVA}
+                    >
+                        <CircularProgress value={20} unit={"rad/s"} />
+                        <View
+
                         >
-                            Angular Velocity
-                        </Text>
+                            <Text
+                                style={{ fontSize: 20, color: "white", fontWeight: "bold" }}
+                            >
+                                Angular Velocity
+                            </Text>
+                        </View>
+                    </View>
+                    <View
+                        style={styles.AVA}
+
+                    >
+                        <CircularProgress value={10} unit={"m/s"} />
+                        <View>
+                            <Text
+                                style={{ fontSize: 20, color: "white", fontWeight: "bold" }}
+                            >
+                                Acceleration
+                            </Text>
+                        </View>
                     </View>
                 </View>
             </LinearGradient>
