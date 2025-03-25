@@ -4,6 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Svg, Circle } from "react-native-svg";
 import AngleBar from '../components/AngleBar';
 import { useSelector } from 'react-redux';
+import AngularVelocity from "../components/AngularVelocity"
 const GaitMetrics = () => {
     const { data, status, Mode } = useSelector((state) => state.data)
     const styles = StyleSheet.create({
@@ -13,6 +14,22 @@ const GaitMetrics = () => {
             justifyContent: "space-around",
             alignItems: "center",
             height: "20%",
+            flexDirection: "row"
+        },
+        AngularVelocity: {
+            width: "100%",
+            //backgroundColor: "pink",
+            justifyContent: "space-around",
+            alignItems: "center",
+            height: "20%",
+            flexDirection: "row"
+        },
+        middleSection: {
+            width: "100%",
+            //backgroundColor: "pink",
+            justifyContent: "space-around",
+            alignItems: "center",
+            height: "60%",
             flexDirection: "row"
         }
     })
@@ -40,6 +57,25 @@ const GaitMetrics = () => {
                 </View>
                 <View>
                     <AngleBar value={data?.ankleAngle} />
+                </View>
+            </View>
+            <View
+                style={styles.middleSection}
+            >
+
+            </View>
+            <View
+                style={styles.AngularVelocity}
+            >
+                <View>
+                    <AngularVelocity angularVelocity={20} />
+                </View>
+                <View>
+                    <Text
+                        style={{ fontSize: 25, color: "white", fontWeight: "bold" }}
+                    >
+                        Angular Velocity
+                    </Text>
                 </View>
             </View>
         </LinearGradient>
