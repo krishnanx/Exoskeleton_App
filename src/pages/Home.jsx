@@ -118,7 +118,7 @@ const Home = () => {
                 flex: 1,
                 justifyContent: "flex-start",
                 alignItems: "center",
-                paddingTop: 38
+
             }}
         >
             <View

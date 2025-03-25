@@ -69,7 +69,7 @@ const GaitMetrics = () => {
                     flex: 1,
                     justifyContent: "flex-start",
                     alignItems: "center",
-                    paddingTop: 38
+                    paddingTop: 0
 
 
                 }}
