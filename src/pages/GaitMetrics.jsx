@@ -5,6 +5,8 @@ import { Svg, Circle } from "react-native-svg";
 import AngleBar from '../components/AngleBar';
 import { useSelector } from 'react-redux';
 import CircularProgress from "../components/CircularProgress"
+import CardWProgress from "../components/CardWProgress"
+import MotorCard from '../components/MotorCard';
 const GaitMetrics = () => {
     const { data, status, Mode } = useSelector((state) => state.data)
     const styles = StyleSheet.create({
@@ -34,11 +36,11 @@ const GaitMetrics = () => {
         },
         middleSection: {
             width: "100%",
-            //backgroundColor: "pink",
-            justifyContent: "space-around",
+            // /backgroundColor: "black",
+            justifyContent: "center",
             alignItems: "center",
             height: "40%",
-            flexDirection: "row"
+            flexDirection: "column"
         },
         AVA: {
             width: "50%",
@@ -46,6 +48,11 @@ const GaitMetrics = () => {
             alignItems: "center",
             height: "100%",
             //backgroundColor: "pink"
+
+        },
+        cards: {
+            width: "100%",
+            height: "50%",
 
         }
     })
@@ -84,7 +91,26 @@ const GaitMetrics = () => {
                 <View
                     style={styles.middleSection}
                 >
+                    <View
+                        style={[styles.cards, { alignItems: "center" }]}
+                    >
+                        <View
+                            style={{ justifyContent: "center", width: "50%", alignItems: "center" }}
 
+                        >
+                            <MotorCard title={"Ground Reaction Force (GRF)"} value={600} unit='N' />
+                        </View>
+                    </View>
+                    <View
+                        style={[styles.cards, { alignItems: "flex-end" }]}
+                    >
+                        <View
+                            style={{ justifyContent: "center", width: "100%", alignItems: "center" }}
+
+                        >
+                            <CardWProgress title={"Step Count"} fontsize={28} value={100} />
+                        </View>
+                    </View>
                 </View>
                 <View
                     style={styles.AngularVelocity}

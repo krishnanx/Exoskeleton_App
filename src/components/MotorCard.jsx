@@ -4,7 +4,7 @@ import { StyleSheet, Animated, Easing, View } from 'react-native';
 import { useEffect, useRef } from "react";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import { useSelector } from "react-redux";
-const MotorCard = ({ title, icon, Content, isActive = true, value }) => {
+const MotorCard = ({ title, icon, Content, isActive = true, value, unit = "", fontsize = 20 }) => {
     const { data, status, Mode } = useSelector((state) => state.data);
     const LeftContent = props => icon
     const styles = StyleSheet.create({
@@ -32,7 +32,7 @@ const MotorCard = ({ title, icon, Content, isActive = true, value }) => {
                 >
                     <LeftContent />
                     <Text
-                        style={{ fontSize: 17 }}
+                        style={{ fontSize: fontsize - 3 }}
                     >
                         {title}
                     </Text>
@@ -41,9 +41,9 @@ const MotorCard = ({ title, icon, Content, isActive = true, value }) => {
                     style={{ width: "auto", justifyContent: "center", alignItems: "center", height: "70%" }}
                 >
                     <Text
-                        style={{ fontSize: 15 }}
+                        style={{ fontSize: fontsize }}
                     >
-                        {value}
+                        {value} {unit}
                     </Text>
                 </View>
 
