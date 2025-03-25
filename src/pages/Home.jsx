@@ -10,6 +10,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import Wrench from '../components/Wrench';
 import { addData, getData, addMode } from '../Store/DataSlice';
+import Loader from '../components/Loader';
 const Home = () => {
     console.log("HI")
     const { data, status, Mode } = useSelector((state) => state.data)
@@ -17,6 +18,14 @@ const Home = () => {
     useEffect(() => {
         dispatch(getData())
     }, [])
+    // useEffect(() => {
+    //     if (status === "loading") {
+    //         return (<></>)
+    //     }
+    // }, [status])
+    // if (status === "loading") {
+    //     return (<></>)
+    // }
     const styles = StyleSheet.create({
         HeadingView: {
             flexDirection: "row",
@@ -98,7 +107,7 @@ const Home = () => {
         console.log("Power Check:", data?.Power === 1);
         console.log(data)
     }, [data])
-    return (
+    return status == "idle" ? (
 
         <LinearGradient
             colors={['#0f172a', '#1e293b', '#4b5563']}
@@ -242,7 +251,21 @@ const Home = () => {
             </View>
         </LinearGradient >
 
-    )
+    ) : status == "loading" ? (
+        <LinearGradient
+            colors={['#0f172a', '#1e293b', '#4b5563']}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+                paddingTop: 38
+            }}
+        >
+            <Loader />
+        </LinearGradient>
+    ) : (<></>)
 }
 
 export default Home

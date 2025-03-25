@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { addData } from "../Store/DataSlice";
+import { addData, addStatus } from "../Store/DataSlice";
 import { useDispatch } from "react-redux";
 const LiveData = () => {
     const [data, setData] = useState("Waiting for updates...");
@@ -11,6 +11,7 @@ const LiveData = () => {
         ws.onopen = () => {
             console.log("Connected to WebSocket server");
             ws.send("Hello from React Native!");
+            // dispatch(addStatus("idle"))
 
         };
 
@@ -21,7 +22,10 @@ const LiveData = () => {
             dispatch(addData(parsedData.new));
         };
 
-        ws.onerror = (error) => console.error("WebSocket Error:", error);
+        ws.onerror = (error) => {
+            console.error("WebSocket Error:", error);
+            dispatch(addStatus("error"))
+        }
 
         ws.onclose = () => console.log("WebSocket disconnected");
 
