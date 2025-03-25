@@ -6,7 +6,7 @@ import { useEffect, useRef } from "react";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import { useSelector } from "react-redux";
 import { addMode } from '../Store/DataSlice';
-const CardWProgress = ({ title, icon, Content, isActive = true, value, unit = "", fontsize = 20, maxValue = 1000 }) => {
+const CardWProgress = ({ title, icon, Content, isActive = true, value = 0, unit = "", fontsize = 20, maxValue = 1000 }) => {
     const { data, status, Mode } = useSelector((state) => state.data);
     const LeftContent = props => icon
     const styles = StyleSheet.create({

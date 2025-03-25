@@ -108,7 +108,7 @@ const GaitMetrics = () => {
                             style={{ justifyContent: "center", width: "100%", alignItems: "center" }}
 
                         >
-                            <CardWProgress title={"Step Count"} fontsize={28} value={100} />
+                            <CardWProgress title={"Step Count"} fontsize={28} value={data?.stepCount} />
                         </View>
                     </View>
                 </View>
