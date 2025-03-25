@@ -11,6 +11,7 @@ import EvilIcons from "react-native-vector-icons/EvilIcons";
 import Wrench from '../components/Wrench';
 import { addData, getData, addMode } from '../Store/DataSlice';
 import Loader from '../components/Loader';
+import WalkingSpeed from '../components/WalkingSpeed';
 const Home = () => {
     console.log("HI")
     const { data, status, Mode } = useSelector((state) => state.data)
@@ -63,9 +64,9 @@ const Home = () => {
             height: "55%",
             //borderWidth: 1.
             paddingLeft: 5,
-            justifyContent: "center",
-            alignItems: "center"
-
+            justifyContent: "flex-start",
+            alignItems: "center",
+            //backgroundColor: "pink"
         },
         PowerStatus: {
             width: 40,
@@ -223,7 +224,8 @@ const Home = () => {
                     style={styles.section3}
 
                 >
-                    <View
+                    <WalkingSpeed value={data?.WalkingSpeed} />
+                    {/* <View
                         style={{ width: "100%", height: "50%", flexDirection: "row" }}
                     >
 
@@ -246,7 +248,8 @@ const Home = () => {
                         >
                             <MotorCard title="Stride Length" icon={<Wrench />} value={0} />
                         </View>
-                    </View>
+                    </View> */}
+
                 </View>
             </View>
         </LinearGradient >

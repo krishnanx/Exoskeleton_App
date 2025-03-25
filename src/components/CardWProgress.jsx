@@ -1,20 +1,21 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react';
 import { Avatar, Button, Card, ProgressBar, MD3Colors, Text } from 'react-native-paper';
 import { StyleSheet, Animated, Easing, View, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useEffect, useRef } from "react";
-import EvilIcons from "react-native-vector-icons/EvilIcons";
-import { useSelector } from "react-redux";
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import { useSelector } from 'react-redux';
 import { addMode } from '../Store/DataSlice';
+
 const CardWProgress = ({ title, icon, Content, isActive = true, value = 0, unit = "", fontsize = 20, maxValue = 1000 }) => {
     const { data, status, Mode } = useSelector((state) => state.data);
-    const LeftContent = props => icon
+    const LeftContent = props => icon;
+    const animatedValue = useRef(new Animated.Value(0)).current;
+
     const styles = StyleSheet.create({
         card: {
             width: "95%",
             height: "95%",
             elevation: 5,
-
         },
         addMax: {
             width: 100,
@@ -24,20 +25,28 @@ const CardWProgress = ({ title, icon, Content, isActive = true, value = 0, unit 
             justifyContent: "center",
             alignItems: "center",
             backgroundColor: "#2C2C2C"
-
         }
-
-
     });
+
     useEffect(() => {
         console.log("Redux Data:", data);
         console.log("MotorCard Value:", value);
         console.log("Redux Status:", status);
+        Animated.timing(animatedValue, {
+            toValue: value / maxValue,
+            duration: 1200,
+            easing: Easing.out(Easing.exp),
+            useNativeDriver: false,
+        }).start();
     }, [data, value, status]);
+
+    const animatedWidth = animatedValue.interpolate({
+        inputRange: [0, 1],
+        outputRange: ['0%', '100%']
+    });
 
     return data ? (
         <Card style={styles.card}>
-            {/* <Card.Title title={title} left={LeftContent} titleStyle={{ justifyContent: "center", alignItems: "center", textAlign: "center", flexWrap: "wrap", }} /> */}
             <Card.Content>
                 <View
                     style={{ flexDirection: "row", width: "auto", justifyContent: "space-around", marginBottom: 10 }}
@@ -64,35 +73,34 @@ const CardWProgress = ({ title, icon, Content, isActive = true, value = 0, unit 
                                 height: 50, borderRadius: 30,
                                 width: "100%",
                                 overflow: 'hidden'
-
                             }}
                         >
                             <ProgressBar
-                                //animatedValue={value / maxValue} // Assuming item.value is a percentage
                                 color="#2C2C2C"
                                 style={{ height: 50, borderWidth: 1.5, backgroundColor: "#2C2C2C", borderRadius: 30, marginBottom: 10 }}
                             />
-
-                            {<LinearGradient
-                                colors={['#FFA500', '#FF8C00']} // Adjust gradient colors here
-
-                                start={{ x: 0, y: 0 }}
-                                end={{ x: 1, y: 0 }}
+                            <Animated.View
                                 style={{
-                                    width: `${value / maxValue * 100}%`,
-                                    height: value < 1 ? 15 : 50,
-                                    borderRadius: 30,
                                     position: 'absolute',
-                                    left: value < 1 ? 3 : 0,
                                     top: value < 1 ? 16 : 0,
+                                    left: value < 1 ? 3 : 0,
+                                    height: value < 1 ? 15 : 50,
+                                    width: animatedWidth,
+                                    borderRadius: 30,
+                                    overflow: 'hidden'
                                 }}
-                            />}
+                            >
+                                <LinearGradient
+                                    colors={['#FFA500', '#FF8C00']}
+                                    start={{ x: 0, y: 0 }}
+                                    end={{ x: 1, y: 0 }}
+                                    style={{ height: "100%", width: "100%" }}
+                                />
+                            </Animated.View>
                         </View>
-
                     </View>
                     <View
                         style={{
-
                             width: "100%", alignItems: "center", height: "30%",
                             justifyContent: "space-between",
                             flexDirection: "row",
@@ -118,15 +126,9 @@ const CardWProgress = ({ title, icon, Content, isActive = true, value = 0, unit 
                         </Text>
                     </View>
                 </View>
-
             </Card.Content>
-            {/* <Card.Cover source={{ uri: 'https://picsum.photos/700' }} /> */}
-            <Card.Actions>
-                {/* <Button>Cancel</Button>
-                <Button>Ok</Button> */}
-            </Card.Actions>
-        </Card >
+        </Card>
     ) : <Text style={{ color: "white", fontSize: 20 }}>Loading data...</Text>
 }
 
-export default CardWProgress
+export default CardWProgress;
