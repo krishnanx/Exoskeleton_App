@@ -16,6 +16,7 @@ const CardWProgress = ({ title, icon, Content, isActive = true, value = 0, unit 
             width: "95%",
             height: "95%",
             elevation: 5,
+            backgroundColor: "#2c3e50"
         },
         addMax: {
             width: 100,
@@ -53,7 +54,7 @@ const CardWProgress = ({ title, icon, Content, isActive = true, value = 0, unit 
                 >
                     <LeftContent />
                     <Text
-                        style={{ fontSize: fontsize - 3 }}
+                        style={{ fontSize: fontsize - 3, color: "#E0F2FE" }}
                     >
                         {title}
                     </Text>
@@ -69,15 +70,11 @@ const CardWProgress = ({ title, icon, Content, isActive = true, value = 0, unit 
                         }}
                     >
                         <View
-                            style={{
-                                height: 50, borderRadius: 30,
-                                width: "100%",
-                                overflow: 'hidden'
-                            }}
+                            style={{ position: 'relative', height: 60, borderRadius: 25, width: "99.4%", overflow: 'hidden' }}
                         >
                             <ProgressBar
-                                color="#2C2C2C"
-                                style={{ height: 50, borderWidth: 1.5, backgroundColor: "#2C2C2C", borderRadius: 30, marginBottom: 10 }}
+                                color="transparent"
+                                style={{ height: 50, borderWidth: 2, backgroundColor: "transparent", borderRadius: 30 }}
                             />
                             <Animated.View
                                 style={{
@@ -112,14 +109,14 @@ const CardWProgress = ({ title, icon, Content, isActive = true, value = 0, unit 
                             activeOpacity={0.8}
                         >
                             <Text
-                                style={{ fontSize: 16, color: "white" }}
+                                style={{ fontSize: 16, color: "#E0F2FE" }}
                             >
                                 Set Goal
                             </Text>
                         </TouchableOpacity>
                         <Text
                             style={{
-                                fontSize: 20, fontWeight: "bold"
+                                fontSize: 20, fontWeight: "bold", color: "#E0F2FE"
                             }}
                         >
                             {value} / {maxValue}
@@ -128,7 +125,7 @@ const CardWProgress = ({ title, icon, Content, isActive = true, value = 0, unit 
                 </View>
             </Card.Content>
         </Card>
-    ) : <Text style={{ color: "white", fontSize: 20 }}>Loading data...</Text>
+    ) : <Text style={{ color: "#e2e8f0", fontSize: 20 }}>Loading data...</Text>
 }
 
 export default CardWProgress;

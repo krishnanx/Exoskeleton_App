@@ -190,7 +190,7 @@ const Home = () => {
                             style={[styles.OperationModes, { marginBottom: 20, borderColor: data?.Power !== 1 ? "red" : "green", fontSize: 20, backgroundColor: Mode == "Walking Assist" ? "#666666" : "transparent" }]}
                         >
                             <Text
-                                style={{ fontSize: 17, color: "white" }}
+                                style={{ fontSize: 17, color: "#E0F2FE" }}
                             >
                                 Walking Assist
                             </Text>
@@ -200,7 +200,7 @@ const Home = () => {
                             style={[styles.OperationModes, { borderColor: data?.Power !== 1 ? "red" : "green", fontSize: 20, backgroundColor: Mode == "Free Mode" ? "#666666" : "transparent" }]}
                         >
                             <Text
-                                style={{ fontSize: 17, color: "white" }}
+                                style={{ fontSize: 17, color: "#E0F2FE" }}
                             >
                                 Free Mode
                             </Text>
@@ -214,7 +214,7 @@ const Home = () => {
                         style={styles.OperationText}
                     >
                         <Text
-                            style={{ fontSize: 17, color: "white" }}
+                            style={{ fontSize: 17, color: "#E0F2FE" }}
                         >
                             OPERATION MODE:   {Mode}
                         </Text>

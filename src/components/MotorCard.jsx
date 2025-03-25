@@ -12,6 +12,7 @@ const MotorCard = ({ title, icon, Content, isActive = true, value, unit = "", fo
             width: "95%",
             height: "95%",
             elevation: 5,
+            backgroundColor: "#2c3e50"
 
         }
 
@@ -32,7 +33,7 @@ const MotorCard = ({ title, icon, Content, isActive = true, value, unit = "", fo
                 >
                     <LeftContent />
                     <Text
-                        style={{ fontSize: fontsize - 3 }}
+                        style={{ fontSize: fontsize - 3, color: "#E0F2FE" }}
                     >
                         {title}
                     </Text>
@@ -41,7 +42,7 @@ const MotorCard = ({ title, icon, Content, isActive = true, value, unit = "", fo
                     style={{ width: "auto", justifyContent: "center", alignItems: "center", height: "70%" }}
                 >
                     <Text
-                        style={{ fontSize: fontsize }}
+                        style={{ fontSize: fontsize, color: "#E0F2FE" }}
                     >
                         {value} {unit}
                     </Text>

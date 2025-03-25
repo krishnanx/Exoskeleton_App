@@ -79,7 +79,7 @@ const GaitMetrics = () => {
                 >
                     <View>
                         <Text
-                            style={{ fontSize: 25, color: "white", fontWeight: "bold" }}
+                            style={{ fontSize: 25, color: "#E0F2FE", fontWeight: "bold" }}
                         >
                             Ankle Joint Angle
                         </Text>
@@ -123,7 +123,7 @@ const GaitMetrics = () => {
 
                         >
                             <Text
-                                style={{ fontSize: 20, color: "white", fontWeight: "bold" }}
+                                style={{ fontSize: 20, color: "#E0F2FE", fontWeight: "bold" }}
                             >
                                 Angular Velocity
                             </Text>
@@ -136,7 +136,7 @@ const GaitMetrics = () => {
                         <CircularProgress value={10} unit={"m/s"} />
                         <View>
                             <Text
-                                style={{ fontSize: 20, color: "white", fontWeight: "bold" }}
+                                style={{ fontSize: 20, color: "#E0F2FE", fontWeight: "bold" }}
                             >
                                 Acceleration
                             </Text>

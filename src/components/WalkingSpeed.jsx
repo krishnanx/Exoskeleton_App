@@ -22,7 +22,7 @@ const WalkingSpeed = ({ value, maxValue = 3 }) => {
 
     return (
         <View style={{ width: "100%", padding: 10 }}>
-            <Text style={{ fontSize: 25, fontWeight: 'bold', marginBottom: 5, color: "white" }}>Walking Speed</Text>
+            <Text style={{ fontSize: 25, fontWeight: 'bold', marginBottom: 5, color: "#E0F2FE" }}>Walking Speed</Text>
 
             <View style={{ justifyContent: "center", alignItems: "center", height: 70 }}>
                 <View style={{ position: 'relative', height: 60, borderRadius: 25, width: "100%", overflow: 'hidden' }}>

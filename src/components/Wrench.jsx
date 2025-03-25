@@ -32,7 +32,7 @@ const Wrench = ({ isactive }) => {
 
     return (
         <Animated.View style={{ transform: [{ scale: scaleValue }] }}>
-            <Icons name="wrench-outline" size={30} />
+            <Icons name="wrench-outline" size={30} color="#E0F2FE" />
         </Animated.View>
     );
 }
