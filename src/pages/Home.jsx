@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useReducer, useMemo } from 'react'
 import { View, Text, StyleSheet, Image, TouchableOpacity, TouchableHighlight } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
 import ToggleSwitch from "../components/ToggleSwitch"
@@ -13,6 +13,7 @@ import { addData, getData, addMode } from '../Store/DataSlice';
 import Loader from '../components/Loader';
 import WalkingSpeed from '../components/WalkingSpeed';
 const Home = () => {
+    const forceRerender = useReducer(() => ({}), {})[1];
     console.log("HI")
     const { data, status, Mode } = useSelector((state) => state.data)
     const dispatch = useDispatch()
@@ -87,12 +88,14 @@ const Home = () => {
         },
         OperationModes: {
             //borderColor: "green",
-            borderWidth: 1.5,
+            borderWidth: 2,
             width: "100%",
             height: "25%",
             borderRadius: 20,
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
+            // elevation: 8, // Controls shadow depth
+            // shadowColor: '#00FF00',
 
         },
         OperationText: {
@@ -104,10 +107,25 @@ const Home = () => {
 
 
     });
+    const getButtonStyle = useMemo(() => (buttonMode) => ({
+        marginBottom: buttonMode === "Walking Assist" ? 20 : 0,
+        borderColor: data?.Power !== 1 ? "red" : "green",
+        fontSize: 20,
+        backgroundColor: Mode === buttonMode ? "#666666" : "#2c3e50",
+        elevation: Mode === buttonMode ? 10 : 0,
+        shadowColor: Mode === buttonMode ? "#00FF00" : "transparent",
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: Mode === buttonMode ? 0.9 : 0,
+        shadowRadius: Mode === buttonMode ? 10 : 0,
+    }), [Mode, data?.Power]);
+    // useEffect(() => {
+    //     console.log("Power Check:", data?.Power === 1);
+    //     console.log(data)
+    // }, [data])
     useEffect(() => {
-        console.log("Power Check:", data?.Power === 1);
-        console.log(data)
-    }, [data])
+        console.log("Mode Changed:", Mode);
+        forceRerender(); // Force re-render when Mode updates
+    }, [Mode]);
     return status == "idle" ? (
 
         <LinearGradient
@@ -187,7 +205,9 @@ const Home = () => {
                     >
                         <TouchableHighlight
                             onPress={() => { dispatch(addMode("Walking Assist")) }}
-                            style={[styles.OperationModes, { marginBottom: 20, borderColor: data?.Power !== 1 ? "red" : "green", fontSize: 20, backgroundColor: Mode == "Walking Assist" ? "#666666" : "transparent" }]}
+                            style={[styles.OperationModes, getButtonStyle("Walking Assist")]}
+                            key={Mode}
+                            underlayColor="#666666"
                         >
                             <Text
                                 style={{ fontSize: 17, color: "#E0F2FE" }}
@@ -197,7 +217,8 @@ const Home = () => {
                         </TouchableHighlight>
                         <TouchableHighlight
                             onPress={() => { dispatch(addMode("Free Mode")) }}
-                            style={[styles.OperationModes, { borderColor: data?.Power !== 1 ? "red" : "green", fontSize: 20, backgroundColor: Mode == "Free Mode" ? "#666666" : "transparent" }]}
+                            style={[styles.OperationModes, getButtonStyle("Free Mode")]}
+                            underlayColor="#666666"
                         >
                             <Text
                                 style={{ fontSize: 17, color: "#E0F2FE" }}
@@ -214,7 +235,7 @@ const Home = () => {
                         style={styles.OperationText}
                     >
                         <Text
-                            style={{ fontSize: 17, color: "#E0F2FE" }}
+                            style={{ fontSize: 16, color: "#E0F2FE", fontWeight: "400" }}
                         >
                             OPERATION MODE:   {Mode}
                         </Text>
