@@ -5,7 +5,7 @@ const LiveData = () => {
     const [data, setData] = useState("Waiting for updates...");
     const dispatch = useDispatch();
     useEffect(() => {
-        const ws = new WebSocket('ws://192.168.1.48:3000');
+        const ws = new WebSocket('ws://nutrigen.myprojects.studio:5000');
 
 
         ws.onopen = () => {

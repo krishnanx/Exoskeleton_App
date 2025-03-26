@@ -39,9 +39,9 @@ export const { addData, addMode, addStatus } = DataSlice.actions;
 export default DataSlice.reducer;
 export const getData = createAsyncThunk("data/get", async () => {
     try {
-        console.log("link:", Constants.expoConfig.extra.SERVER)
+        //console.log("link:", Constants.expoConfig.extra.SERVER)
         await new Promise(resolve => setTimeout(resolve, 1000));
-        const response = await axios.get("http:/192.168.1.48:3000/Data/getsingle");
+        const response = await axios.get(Constants.expoConfig.extra.SERVER);
         console.log(response.data.data[0])
         console.log(response.data.data[0]);
         return response.data.data[0]; // Return data for Redux state
