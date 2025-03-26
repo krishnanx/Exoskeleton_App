@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import CircularProgress from "../components/CircularProgress"
 import CardWProgress from "../components/CardWProgress"
 import MotorCard from '../components/MotorCard';
+import Loader from "../components/Loader"
 const GaitMetrics = () => {
     const { data, status, Mode } = useSelector((state) => state.data)
     const styles = StyleSheet.create({
@@ -56,7 +57,7 @@ const GaitMetrics = () => {
 
         }
     })
-    return (
+    return status == "idle" ? (
         <ScrollView
             style={styles.Main}
             contentContainerStyle={{ flexGrow: 1, height: 1000, justifyContent: "flex-start" }}
@@ -74,7 +75,7 @@ const GaitMetrics = () => {
 
                 }}
             >
-                <View
+                {data?.Power === 1 && <View
                     style={styles.AngleBar}
                 >
                     <View>
@@ -87,8 +88,8 @@ const GaitMetrics = () => {
                     <View>
                         <AngleBar value={data?.ankleAngle} />
                     </View>
-                </View>
-                <View
+                </View>}
+                {data?.Power === 1 && <View
                     style={styles.middleSection}
                 >
                     <View
@@ -111,8 +112,8 @@ const GaitMetrics = () => {
                             <CardWProgress title={"Step Count"} fontsize={28} value={data?.stepCount} />
                         </View>
                     </View>
-                </View>
-                <View
+                </View>}
+                {data?.Power === 1 && <View
                     style={styles.AngularVelocity}
                 >
                     <View
@@ -142,11 +143,25 @@ const GaitMetrics = () => {
                             </Text>
                         </View>
                     </View>
-                </View>
+                </View>}
             </LinearGradient>
         </ScrollView>
 
-    )
+    ) : status == "loading" ? (
+        <LinearGradient
+            colors={['#0f172a', '#1e293b', '#4b5563']}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+                paddingTop: 38
+            }}
+        >
+            <Loader />
+        </LinearGradient>
+    ) : (<></>)
 }
 
 export default GaitMetrics

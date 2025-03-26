@@ -189,7 +189,7 @@ const Home = () => {
                     {data?.Power === 1 ? "ON" : "OFF"}
                 </Text>
             </View >
-            <View
+            {data?.Power === 1 && <View
                 style={styles.Main}
             >
                 <View
@@ -272,7 +272,7 @@ const Home = () => {
                     </View> */}
 
                 </View>
-            </View>
+            </View>}
         </LinearGradient >
 
     ) : status == "loading" ? (
