@@ -8,19 +8,22 @@
             "developmentClient": true,
             "distribution": "internal",
             "env": {
-                "SERVER": "@SERVER"
+                "SERVER": "@SERVER",
+                "WEBSOC": "@WEBSOC"
             }
         },
         "preview": {
             "distribution": "internal",
             "env": {
-                "SERVER": "@SERVER"
+                "SERVER": "@SERVER",
+                "WEBSOC": "@WEBSOC"
             }
         },
         "production": {
             "autoIncrement": true,
             "env": {
-                "SERVER": "@SERVER"
+                "SERVER": "@SERVER",
+                "WEBSOC": "@WEBSOC"
             }
         }
     },

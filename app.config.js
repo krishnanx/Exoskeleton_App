@@ -2,20 +2,21 @@ import 'dotenv/config';
 
 export default {
   expo: {
-    name: "Exoskeleton",
-    slug: "Exoskeleton",
+    name: "ExoSense",
+    slug: "ExoSense",
     version: "1.0.0",
     platforms: ["ios", "android", "web"],
     android: {
-      package: "com.krishnanx.Exoskeleton",
+      package: "com.krishnanx.ExoSense",
       newArchEnabled: true
     },
     ios: {
-      bundleIdentifier: "com.krishnanx.Exoskeleton",
+      bundleIdentifier: "com.krishnanx.ExoSense",
       newArchEnabled: true
     },
     extra: {
-      SERVER: process.env.SERVER
+      SERVER: process.env.SERVER,
+      WEBSOC: process.env.WEBSOC
     }
   }
 };
